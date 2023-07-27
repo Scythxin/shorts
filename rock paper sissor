@@ -1,0 +1,57 @@
+# Rock paper Scissors game!
+import random
+
+c = ["ROCK","PAPER","SCISSORS"]
+round_counter = 1
+w_counter = 0
+l_counter = 0
+print("Round: ",round_counter)
+p_name=input("Enter your Name: ")
+
+def rpsgame():
+    global l_counter,w_counter
+    computer = random.choice(c)
+    player = input("Rock, Paper or Scissors?: ")
+
+    print("Computer has Chosen: ",computer)
+    print("{} has Chosen: ".format(p_name),player)
+    def gamecont():
+        global round_counter
+        cont = input("Type 'y' if you want to go another round.\nType 'n' if you'd like to exit the game.\nType 's' if you'd like to see your stats.\n")
+        if cont == "s":
+            print("Stats:")
+            print("Player Name: ",p_name,end="\n")
+            print("Total Wins: {}\nTotal Losses: {}".format(w_counter,l_counter))
+            gamecont()
+        elif cont == "y":
+            round_counter+=1
+            rpsgame()
+        elif cont == "n":
+            exit()
+        else:
+            print("Please enter a valid input.")
+            gamecont()
+
+    if player.upper() == computer:
+        print("Tie!")
+        gamecont()
+    elif player.upper() not in c:
+        print("Wrong Input, please enter a valid choice.")
+        rpsgame()
+    elif player.upper() == c[0] and computer == c[1]:
+        print("You Lose!")
+        l_counter+=1
+        gamecont()
+    elif player.upper() == c[1] and computer == c[2]:
+        print("You Lose!")
+        l_counter+=1
+        gamecont()
+    elif player.upper() == c[2] and computer == c[0]:
+        print("You Lose!")
+        l_counter+=1
+        gamecont()
+    else:
+        print("You Win!")
+        w_counter+=1
+        gamecont()
+rpsgame()
